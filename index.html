@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Giá vàng - Kim Thúy</title>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #e5381c;
+      color: white;
+    }
+    .header-top {
+      background-color: #d2ad4f;
+      color: #fdfdfd;
+      font-size: 38px;
+      font-weight: bold;
+      text-align: center;
+      padding: 15px;
+    }
+    .header-bottom {
+      background-color: #f3d58b;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      padding: 2px 10px;
+      font-size: 12px;
+      color: #002233;
+      flex-wrap: wrap;
+    }
+    .header-bottom .left-info {
+      display: inline-flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 25px;
+    }
+    .header-bottom .tradingview-widget-container {
+      display: flex;
+      align-items: center;
+    }
+    .info-top {
+      background-color: #e5381c;
+      color: yellow;
+      padding: 10px 20px 0 20px;
+      font-size: 22px;
+    }
+    .price-board {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 28px;
+      line-height: 1.6;
+    }
+    .price-board th {
+      background-color: #ff3e3e;
+      padding: 12px;
+      color: lime;
+    }
+    .price-board td {
+      padding: 10px 8px;
+      border-top: 1px solid #fff;
+      color: white;
+    }
+    .price-board td:first-child {
+      text-align: left;
+      padding-left: 30px;
+      color: yellow;
+    }
+    .marquee {
+      background-color: #e5381c;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+    .marquee-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 40s linear infinite;
+      font-size: 30px;
+      font-weight: bold;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-100%); }
+    }
+    .footer {
+      background-color: #1d3765;
+      color: white;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+    }
+    .footer img.logo {
+      height: 120px;
+    }
+    .footer-left, .footer-right {
+      flex: 1 1 45%;
+    }
+    .footer-right {
+      text-align: right;
+    }
+    .social-icons img {
+      width: 32px;
+      margin: 0 5px;
+    }
+    @media (max-width: 768px) {
+      .footer {
+        flex-direction: column;
+        text-align: center;
+      }
+      .footer-right {
+        margin-top: 20px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header-top">
+  DOANH NGHIỆP TƯ NHÂN VÀNG BẠC KIM THÚY - HẢI DƯƠNG
+</div>
+
+<div class="header-bottom">
+  <div class="left-info">
+    <span>Cập nhật lúc: <strong id="datetime">--:--:--</strong></span>
+    <span>Đơn vị tính: VNĐ / lượng</span>
+    <span>Giá vàng Thế giới:</span>
+  </div>
+  <div class="tradingview-widget-container">
+    <div id="tradingview-widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-single-quote.js" async>
+    {
+      "symbol": "PEPPERSTONE:XAUUSD",
+      "width": 320,
+      "height": 100,
+      "colorTheme": "light",
+      "isTransparent": true,
+      "locale": "vi_VN",
+      "showChange": true
+    }
+    </script>
+  </div>
+</div>
+
+<div class="info-top">
+  <div><strong>Đơn vị tính:</strong> Nghìn VNĐ/Chỉ</div>
+  <div id="datetime2">--:--:--</div>
+</div>
+
+<table class="price-board">
+  <thead>
+    <tr>
+      <th>LOẠI VÀNG</th>
+      <th>MUA VÀO</th>
+      <th>BÁN RA</th>
+    </tr>
+  </thead>
+  <tbody id="price-table-body">
+    <!-- Bảng giá sẽ được nạp tự động -->
+  </tbody>
+</table>
+
+<div class="marquee">
+  <div class="marquee-text">Chân thành Cảm Ơn Quý Khách Hàng ❤️</div>
+</div>
+
+<div class="footer">
+  <div class="footer-left">
+    <img src="https://i.imgur.com/NiE3vWJ.jpeg" alt="logo" class="logo"><br><br>
+  </div>
+  <div class="footer-right">
+    <p><strong>Về Chúng tôi</strong><br>
+      Doanh nghiệp tư nhân vàng bạc Kim Thúy - Hải Dương<br>
+      282 Đường Thanh Niên – TP Hải Dương<br>
+      Hotline: 0982 112 555
+    </p>
+    <p><strong>Hãy Kết nối với chúng tôi</strong><br>
+      <span class="social-icons">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+        <img src="https://giabac.vn/Content/ProductPrice/images/icon/tiktok.png" alt="TikTok">
+        <img src="https://giabac.vn/Content/ProductPrice/images/icon/zalo.png" alt="Zalo">
+      </span>
+    </p>
+  </div>
+</div>
+
+<script>
+function updateTime() {
+  const now = new Date();
+  const time = now.toLocaleTimeString('vi-VN');
+  const date = now.toLocaleDateString('vi-VN');
+  document.getElementById("datetime").innerText = `${time} ${date}`;
+  document.getElementById("datetime2").innerText = `${date} ${time}`;
+}
+setInterval(updateTime, 1000);
+updateTime();
+
+async function fetchPriceTable() {
+  const sheetId = '1mF6NQWMLHWJiuaNSvK-6AXolrgUuS_QvW3rU45E_g24';
+  const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.text();
+    const parsed = Papa.parse(data, { header: false });
+    const rows = parsed.data;
+    rows.shift();
+
+    const tbody = document.getElementById('price-table-body');
+    tbody.innerHTML = '';
+
+    for (const row of rows) {
+      if (row.length >= 3) {
+        const type = row[0].trim();
+        const buy = row[1].trim();
+        const sell = row[2].trim();
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${type}</td>
+          <td>${buy}</td>
+          <td>${sell}</td>
+        `;
+        tbody.appendChild(tr);
+      }
+    }
+  } catch (error) {
+    console.error('Lỗi khi tải bảng giá:', error);
+  }
+}
+
+fetchPriceTable();
+</script>
+
+</body>
+</html>
